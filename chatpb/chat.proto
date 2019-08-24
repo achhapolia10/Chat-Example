@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "chatpb";
+
+message LoginRequest{
+    string Username = 1;
+}
+
+message LoginResponse{
+    string LoginResult =1;
+}
+
+message Messages{
+    string Sender =1;
+    string Reciever =2;
+    string Message = 3;
+}
+
+message SendMessageResponse{
+    string Status =1;
+}
+
+service ChatService { 
+    rpc Login(LoginRequest) returns (LoginResponse);
+    rpc StartReciveing(LoginResponse) returns (stream Messages);
+    rpc SendMessage(Messages) returns (SendMessageResponse);
+}
